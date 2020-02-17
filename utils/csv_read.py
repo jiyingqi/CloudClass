@@ -1,8 +1,9 @@
 import csv
 
-
+# Dict for storage
 out = {}
 
+# Parse the train.csv file for target values
 with open('../../train.csv') as traincsv:
     reader = csv.DictReader(traincsv)
     for row in reader:
@@ -36,7 +37,7 @@ with open('../../train.csv') as traincsv:
 traincsv.close()
                         
                     
-
+# Write to individual files for individual testing
 with open('../csvs/fish.csv', 'w') as fishcsv:
     fieldnames = ["image_name", "fish"]
     writer = csv.DictWriter(fishcsv,fieldnames=fieldnames)
@@ -73,6 +74,8 @@ with open('../csvs/sugar.csv', 'w') as fishcsv:
         tmp = row.split("_")
         writer.writerow({'image_name' : tmp[0], 'sugar' : out[tmp[0]]['sugar']})
 
+
+# For multiclassification training
 with open('../csvs/targets.csv', 'w') as fishcsv:
     fieldnames = ["image_name", "fish", "flower", "gravel", "sugar"]
     writer = csv.DictWriter(fishcsv,fieldnames=fieldnames)
